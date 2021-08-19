@@ -42,8 +42,30 @@ class Airplane {
 */
 
 class Person {
-  
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+  eat(someFood){
+    this.stomach.push(someFood);
+    return this.stomach;
+  }
+  poop(){
+    this.stomach = [];
+    return this.stomach;
+  }
+  toString(){
+    return `${this.name}, ${this.age}`;
+  }
 }
+
+const mary = new Person('Mary', 50);
+
+console.log(mary);
+console.log(mary.eat('apple'));
+console.log(mary.poop());
+console.log(mary.toString());
 
 /*
   TASK 2
@@ -60,8 +82,49 @@ class Person {
 */
 
 class Car {
-  
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons){
+    this.tank = this.tank + gallons;
+    return this.tank;
+  }
+  drive(distance){
+    const fuel = this.tank * this.milesPerGallon;
+    if(distance === fuel){
+      this.odometer = this.odometer + distance;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }else if(distance > fuel){
+      this.odometer = this.odometer + fuel;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`
+    }else if(distance < fuel){
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - (distance / this.milesPerGallon);
+      return `I ran out of fuel at ${fuel} miles!`
+    }
+  }
 }
+
+const kia = new Car('Forte', 25);
+const kia2 = new Car('Optima', 25);
+console.log(kia);
+console.log(kia2);
+
+kia.fill(10);
+kia2.fill(10);
+console.log(kia);
+console.log(kia2);
+
+console.log(kia.drive(100), kia);
+console.log(kia2.drive(250), kia2);
+
+
+
 
 /*
   TASK 3
